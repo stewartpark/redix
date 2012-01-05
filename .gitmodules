@@ -1,0 +1,3 @@
+[submodule "node_modules/redix"]
+	path = node_modules/redix
+	url = https://github.com/interruptz/redix.git

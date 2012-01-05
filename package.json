@@ -1,0 +1,21 @@
+{
+  "author": "Ju-yeong Park <interruptz@gmail.com> (http://blog.nerds.kr)",
+  "name": "redix",
+  "description": "Redix is a multiplexed redis proxy server written in nodeJS.",
+  "version": "0.0.0",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/interruptz/redix.git"
+  },
+  "main": "redix.js",
+  "engines": {
+    "node": "~0.6.6"
+  },
+  "dependencies": {
+    "redis": "~0.7.1",
+    "hiredis": "~0.1.13",
+    "optimist": "~0.2.8",
+    "hash_ring": "~0.2.0"
+  },
+  "devDependencies": {}
+}

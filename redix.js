@@ -131,7 +131,15 @@ function boot() {
 
                             // Split commands for scale-out.
                             // Send this job to worker.
-                            worker.work({instr: 'command', cmd: cmd, prm: prm, connectionId: my_ident, defer_id: defer_count++});
+							var nuCount = scale.redisNumberOfSplitable(my_ident, cmd, prm, protocol.getAttribute(cmd));
+							var isGoingToSplit = (nuCount > 1);
+							console.log('EMIT COMMAND:', cmd , 'prm', prm, 'defer_count:', global['defer_count'],'+', nuCount, '  isGoingToSplit ',isGoingToSplit); 
+                            worker.work({instr: 'command', cmd: cmd, prm: prm, connectionId: my_ident, defer_id: defer_count, isGoingToSplit: isGoingToSplit});
+							//if(global['conn'][my_ident].isMulti){
+							//	global['defer_count'] ++;
+							//} else {
+								global['defer_count'] += nuCount;
+							//}
                             });
                         });
             }).listen(server_port);

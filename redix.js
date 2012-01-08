@@ -138,7 +138,7 @@ function boot() {
 							//if(global['conn'][my_ident].isMulti){
 							//	global['defer_count'] ++;
 							//} else {
-								global['defer_count'] += nuCount;
+								global['defer_count'] += nuCount == 1 ? 1 : nuCount+1;
 							//}
                             });
                         });

@@ -117,12 +117,24 @@ function boot() {
                         // Clean the connection.
                         //work({instr: 'clean', connectionId: my_ident});
                         worker.cleanConn(my_ident);
-                        });
+                    });
                     c.on('error', function(exception){
                             console.log(exception);
-                        });
+                    });
 
+                    var defer_stream = '';
                     c.on('data', function(data){
+                        
+                        if( data.toString().substring(data.toString().length - 2) != '\r\n'){
+                            defer_stream += data.toString();
+                            console.log('@@@@@@@@@@@@@@@@@@@@ DEFER STREAM!!!');
+                            return;
+                        }else{
+                            data = defer_stream + data.toString();
+                            defer_stream = '';
+                        }
+                        console.log(data.toString())
+
                         // Tokenize input stream.
                         protocol.decode(data.toString(), function(x) {
                             var cmd, prm;
@@ -142,8 +154,8 @@ function boot() {
 								global['defer_count'] += nuCount == 1 ? 1 : nuCount;
                             }
 							//}
-                            });
                         });
+                    });
             }).listen(server_port);
     });
 }
